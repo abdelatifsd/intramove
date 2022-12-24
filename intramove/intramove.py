@@ -16,9 +16,7 @@ class Intramove:
         return cls.available_packages
 
     def __init__(self):
-        self.packages = {"headlines-100": "price_1MIh4iB9KUi6tSIMpd2zttdn",
-                        "headlines-500":"price_1MIh4iB9KUi6tSIMjV6vFrEW",
-                        "headlines-1000":"price_1MIh4iB9KUi6tSIMCUax7gEa"}
+        self.packages = {"headlines-100": "prod_N2md5pnwvPycA0"}
         self.headers = {
             "accept": "application/json",
             "Content-Type": "application/json",
@@ -61,6 +59,7 @@ class Intramove:
             headers=self.headers,
             params=payload,
         )
+        print(response.json())
         url = response.json()["session_id"]["url"]
         webbrowser.open(url)
 
