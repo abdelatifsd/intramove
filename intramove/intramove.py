@@ -7,7 +7,7 @@ from ratelimiter import RateLimiter
 class Intramove:
     """The Intramove class is a client for interacting with an API that allows you to purchase and use various packages of news headlines analysis services."""
 
-    available_packages = ["headlines-15", "headlines-500"]
+    available_packages = ["headlines-100", "headlines-500","headlines-1000"]
     current_service_ip = "http://intramove.com:8000"
 
     @classmethod
@@ -16,7 +16,9 @@ class Intramove:
         return cls.available_packages
 
     def __init__(self):
-        self.packages = {"headlines-15": "prod_N1vFZNiYNDhyM3"}
+        self.packages = {"headlines-100": "price_1MIh4iB9KUi6tSIMpd2zttdn",
+                        "headlines-500":"price_1MIh4iB9KUi6tSIMjV6vFrEW",
+                        "headlines-1000":"price_1MIh4iB9KUi6tSIMCUax7gEa"}
         self.headers = {
             "accept": "application/json",
             "Content-Type": "application/json",
