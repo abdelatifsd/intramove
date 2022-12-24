@@ -2,8 +2,24 @@ from intramove import Intramove
 
 imove = Intramove()
 
-imove.buy_package(product="headlines", quantity=1)
+# Using the same email and name from checkout, get your unique ID
 
-api_key = imove.get_api_key(email="dan@gmail.com",name="dan")
-analysis = imove.analyze_headline(api_key=api_key, headline="The US stock market crashed", date="12/12/2022", callback_url = "")
-print(analysis)
+my_id = imove.get_id(email="abdulatifsal@gmail.com", name="abdellatif")
+
+# Use your unique ID to get your active API key
+my_api_key = imove.get_api_key(my_id)
+
+
+#print(imove.get_status(my_api_key))
+# Start using the API!
+callback_url= ""#"https://webhook.site/6116f4f2-2ff8-49e7-a50b-706b67f74b08"
+
+analysis = imove.analyze_headline(
+    api_key=my_api_key,
+    headline="The US stock market crashed",
+    date="",
+    #callback_url=callback_url,
+)
+
+if not callback_url:
+    print(analysis)
