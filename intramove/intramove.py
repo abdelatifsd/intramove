@@ -8,7 +8,7 @@ class Intramove:
     """The Intramove class is a client for interacting with an API that allows you to purchase and use various packages of news headlines analysis services."""
 
     available_packages = ["headlines-15", "headlines-500"]
-    current_service_ip = "http://0.0.0.0:8000"
+    current_service_ip = "http://intramove.com:8000"
 
     @classmethod
     def get_available_packages(cls):
