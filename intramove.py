@@ -97,7 +97,7 @@ class Intramove:
         payload = {"api_key": api_key}
         return self._call_endpoint("status", payload)
 
-    @RateLimiter(max_calls=1, period=0.001)
+    @RateLimiter(max_calls=1, period=0.0001)
     def analyze_headline(self, headline:str, date:str, api_key:str, callback_url:str=""):
 
         if not isinstance(headline, str) or not headline:
