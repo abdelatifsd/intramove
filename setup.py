@@ -20,7 +20,6 @@ setuptools.setup(
     install_requires = ["ratelimiter","bson","requests","webbrowser"],
     keywords = ["python", "deep learning", "finance", "text classification", "text analysis", "sentiment"],
     classifiers=[
-        "Development Status :: 1 - Developing"
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
