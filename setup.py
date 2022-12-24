@@ -1,7 +1,11 @@
 import setuptools
+import codecs
+import os
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+local_path = os.path.abspath(os.path.dirname(__file__))
+
+with codecs.open(os.path.join(local_path, "README.md"), encoding="utf-8") as fh:
+    long_description = "\n" + fh.read()
 
 setuptools.setup(
     name="intramove",
