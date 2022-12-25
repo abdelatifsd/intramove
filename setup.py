@@ -9,7 +9,7 @@ with codecs.open(os.path.join(local_path, "README.md"), encoding="utf-8") as fh:
 
 setuptools.setup(
     name="intramove",
-    version="0.0.7",
+    version="0.0.8",
     author="Abdellatif Dalab",
     author_email="abdulatifsal@gmail.com",
     description="A client for interacting with Intramove.ai API",
