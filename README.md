@@ -15,9 +15,9 @@ imove = Intramove()
 
 print(imove.get_available_packages()) # Displays all the available product packages 
 
-# Opens a web browsers with a stripe payment link 
+# Opens a web browsers with a stripe payment link  - if it doesn't, you can just paste the link in a browser
 # An account with your checkout email and name will be automatically registered in intramove's database
-imove.buy_package(product="headlines-15", quantity=1) 
+url, session_details = imove.buy_package(product="headlines-100", quantity=1) 
 
 
 ```
