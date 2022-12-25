@@ -59,9 +59,9 @@ class Intramove:
             headers=self.headers,
             params=payload,
         )
-        print(response.json())
         url = response.json()["session_id"]["url"]
         webbrowser.open(url)
+        return url
 
     @RateLimiter(max_calls=1, period=0.5)
     def get_id(self, email: str, name: str):
