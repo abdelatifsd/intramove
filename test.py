@@ -2,9 +2,9 @@ from intramove.intramove import Intramove
 
 imove = Intramove()
 
-#print(imove.get_available_packages())
+# print(imove.get_available_packages())
 
-#imove.buy_package(product="headlines-100", quantity=1) 
+# imove.buy_package(product="headlines-100", quantity=1)
 
 my_id = imove.get_id(email="abdulatifsal@gmail.com", name="abdellatif")["client_id"]
 

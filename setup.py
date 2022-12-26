@@ -9,7 +9,7 @@ with codecs.open(os.path.join(local_path, "README.md"), encoding="utf-8") as fh:
 
 setuptools.setup(
     name="intramove",
-    version="0.0.8",
+    version="0.0.9",
     author="Abdellatif Dalab",
     author_email="abdulatifsal@gmail.com",
     description="A client for interacting with Intramove.ai API",
@@ -17,12 +17,19 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/abdelatifsd/intramove",
     packages=setuptools.find_packages(),
-    install_requires = ["ratelimiter","bson","requests"],
-    keywords = ["python", "deep learning", "finance", "text classification", "text analysis", "sentiment"],
+    install_requires=["ratelimiter", "bson", "requests"],
+    keywords=[
+        "python",
+        "deep learning",
+        "finance",
+        "text classification",
+        "text analysis",
+        "sentiment",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )

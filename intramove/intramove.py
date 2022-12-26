@@ -16,7 +16,9 @@ class Intramove:
         return cls.available_packages
 
     def __init__(self):
-        self.packages = {"headlines-100": "prod_N2ndwwdkNjVThi"} #"prod_N2ndwwdkNjVThi"} 
+        self.packages = {
+            "headlines-100": "prod_N2ndwwdkNjVThi"
+        }  # "prod_N2ndwwdkNjVThi"}
         self.headers = {
             "accept": "application/json",
             "Content-Type": "application/json",
@@ -61,7 +63,13 @@ class Intramove:
         )
         url = response.json()["session_id"]["url"]
         session_details = response.json()
-        webbrowser.open(url)
+        try:
+            webbrowser.open(url)
+        except:
+            print(
+                "Couldn't open browser. Please copy the link and run it in the browser."
+            )
+            return url, session_details
         return url, session_details
 
     @RateLimiter(max_calls=1, period=0.5)
