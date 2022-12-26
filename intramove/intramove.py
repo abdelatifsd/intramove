@@ -5,9 +5,9 @@ from ratelimiter import RateLimiter
 
 
 class Intramove:
-    """The Intramove class is a client for interacting with an API that allows you to purchase and use various packages of news headlines analysis services."""
+    """The Intramove class is a client for interacting with an API that allows you to purchase and use various packages of news analysis services."""
 
-    available_packages = ["headlines-100"]
+    available_packages = ["headlines-100","articles-100"]
     current_service_ip = "https://intramove.com:443"
 
     @classmethod
@@ -17,7 +17,8 @@ class Intramove:
 
     def __init__(self):
         self.packages = {
-            "headlines-100": "prod_N2ndwwdkNjVThi"
+            "headlines-100": "prod_N2ndwwdkNjVThi",
+            "articles-100": "prod_N3UFpCDcp0Hisv"
         }  # "prod_N2ndwwdkNjVThi"}
         self.headers = {
             "accept": "application/json",
@@ -104,28 +105,48 @@ class Intramove:
         return self.api_key
 
     @RateLimiter(max_calls=1, period=0.5)
-    def credits_available(self, api_key: str):
+    def credits_available(self, api_key: str, product_name:str):
         """The credits_available method allows you to retrieve information about the number of credits available for a given API key."""
         if not isinstance(api_key, str) or not api_key:
             raise ValueError("api_key must be a non-empty string")
 
-        payload = {"api_key": api_key}
+        if not isinstance(product_name, str) or not product_name:
+            raise ValueError("product_name must be a non-empty string")
+
+        if product_name not in Intramove.available_packages:
+            raise ValueError("product_name must be one of the avalable packages.")
+
+        payload = {"api_key": api_key, "product_name":product_name}
         return self._call_endpoint("credits_available", payload)
 
     @RateLimiter(max_calls=1, period=0.5)
-    def credits_consumed(self, api_key: str):
+    def credits_consumed(self, api_key: str, product_name:str):
         """The credits_consumed method allows you to retrieve information about the number of credits consumed for a given API key."""
         if not isinstance(api_key, str) or not api_key:
             raise ValueError("api_key must be a non-empty string")
-        payload = {"api_key": api_key}
+
+        if not isinstance(product_name, str) or not product_name:
+            raise ValueError("product_name must be a non-empty string")
+
+        if product_name not in Intramove.available_packages:
+            raise ValueError("product_name must be one of the avalable packages.")
+
+        payload = {"api_key": api_key, "product_name":product_name}
         return self._call_endpoint("credits_consumed", payload)
 
     @RateLimiter(max_calls=1, period=0.5)
-    def status(self, api_key: str):
+    def status(self, api_key: str, product_name:str):
         """The status method allows you to retrieve the status of a given API key."""
         if not isinstance(api_key, str) or not api_key:
             raise ValueError("api_key must be a non-empty string")
-        payload = {"api_key": api_key}
+        
+        if not isinstance(product_name, str) or not product_name:
+            raise ValueError("product_name must be a non-empty string")
+
+        if product_name not in Intramove.available_packages:
+            raise ValueError("product_name must be one of the avalable packages.")
+
+        payload = {"api_key": api_key, "product_name":product_name}
         return self._call_endpoint("status", payload)
 
     @RateLimiter(max_calls=1, period=0.0001)
@@ -172,5 +193,52 @@ class Intramove:
             f"{Intramove.current_service_ip}/analyze/headline",
             headers=headline_headers,
             params=headline_payload,
+        )
+        return response.json()
+
+    @RateLimiter(max_calls=1, period=0.0001)
+    def analyze_article(
+        self, article: str, date: str, api_key: str, callback_url: str = ""
+    ):
+        """
+        Analyze a given article for financial sentiment.
+
+        Parameters:
+        - article (str): the article to analyze
+        - date (str): the date of the headline
+        - api_key (str): the API key to use for authentication
+        - callback_url (str, optional): the URL to send the results to. If not provided, the results will be returned directly.
+
+        Returns:
+        - A dictionary containing the results of the analysis.
+        """
+        if not isinstance(article, str) or not article:
+            raise ValueError("article must be a non-empty string")
+
+        if not isinstance(date, str):
+            raise ValueError("date must be a string")
+
+        if not isinstance(api_key, str) or not api_key:
+            raise ValueError("api_key must be a non-empty string")
+
+        if not isinstance(callback_url, str):
+            raise ValueError("callback_url must be a string")
+
+        article_payload = {
+            "article": article,
+            "date": date,
+            "callback_url": callback_url,
+        }
+
+        article_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "api-key": api_key,
+        }
+
+        response = requests.post(
+            f"{Intramove.current_service_ip}/analyze/article",
+            headers=article_headers,
+            params=article_payload,
         )
         return response.json()
