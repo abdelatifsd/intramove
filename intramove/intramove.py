@@ -47,7 +47,7 @@ class Intramove:
 
         return response
 
-    def buy_package(self, product: str = "headlines-15", quantity: int = 1):
+    def buy_package(self, product: str, quantity: int = 1):
         """The buy_package method allows you to purchase a package of news headlines by specifying the product name and quantity,
         and it opens a URL in your web browser to complete the purchase."""
 

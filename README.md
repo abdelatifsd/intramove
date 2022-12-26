@@ -24,6 +24,7 @@ url, session_details = imove.buy_package(product="articles-100", quantity=1)
 ```
 
 Once purchase is done
+
 ```python
 from intramove.intramove import Intramove
 
@@ -47,10 +48,22 @@ headline_analysis = imove.analyze_headline(
 
 if not callback_url:
     print(headline_analysis)
+```
+How the headline analysis output would look
+```python
+# Headline analysis
+{"text":"ECB Hikes Rates by 50bps, Signals Further IncreasesEuro Area Interest ...",
+"datetime":"12/15/2022",
+"sign":"bear",
+"indicator":"rate hikes",
+"description":"rate hikes increased",
+"score":-0.6049461960792542}
+```
 
- article = """The S&P/TSX Composite index extended early advances and closed 0.8% higher at 19,500 on Friday, notching a 0.3% increase on the week and outperforming its US counterparts with gains for energy producers and banks. In the meantime, investors digested domestic growth data, pointing to a stall in November and confirming that the Canadian economy expanded by 0.1% in October as growth in services-producing industries offset losses for goods-producing industries. Oil companies soared 4% to lead the gains in the session, tracking the second consecutive weekly increase for crude oil benchmarks. Toronto’s heavyweight banking and mining sectors also booked gains. On the other hand, concerns about tighter monetary policy continued to press the technology sector, leading losses for the day with a 3% slide for Shopify. The Toronto Exchange will be closed on Monday and Tuesday for holidays."""
+```python
+article = """The S&P/TSX Composite index extended early advances and closed 0.8% higher at 19,500 on Friday, notching a 0.3% increase on the week and outperforming its US counterparts with gains for energy producers and banks. In the meantime, investors digested domestic growth data, pointing to a stall in November and confirming that the Canadian economy expanded by 0.1% in October as growth in services-producing industries offset losses for goods-producing industries. Oil companies soared 4% to lead the gains in the session, tracking the second consecutive weekly increase for crude oil benchmarks. Toronto’s heavyweight banking and mining sectors also booked gains. On the other hand, concerns about tighter monetary policy continued to press the technology sector, leading losses for the day with a 3% slide for Shopify. The Toronto Exchange will be closed on Monday and Tuesday for holidays."""
 
-article_analysis = imove.analyze_headline(
+article_analysis = imove.analyze_article(
     api_key=my_api_key,
     article=article,
     date="12/15/2022",
@@ -60,18 +73,8 @@ article_analysis = imove.analyze_headline(
 if not callback_url:
     print(article_analysis)
 ```
-How the output would look
-
+How the article analysis output would look
 ```python
-# Headline analysis
-{"text":"ECB Hikes Rates by 50bps, Signals Further IncreasesEuro Area Interest ...",
-"datetime":"12/15/2022",
-"sign":"bear",
-"indicator":"rate hikes",
-"description":"rate hikes increased",
-"score":-0.6049461960792542}
-
-# Article analysis
 {
     "chunks": [
         {
@@ -107,10 +110,9 @@ How the output would look
     "average_sign": "bull",
     "datetime": "12/07/2022",
 }
-
 ```
-
 Other useful methods
+
 ```python
 print(imove.status(my_api_key, product_name = "headlines-100")["status"]) # Prints whether the api key is active
 print(imove.credits_consumed(my_api_key, product_name = "headlines-100")["credits_consumed"]) # Prints how many credits have been used
