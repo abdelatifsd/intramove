@@ -4,7 +4,7 @@ imove = Intramove()
 
 # print(imove.get_available_packages())
 
-# imove.buy_package(product="headlines-100", quantity=1)
+imove.buy_package(product="headlines-100", quantity=1)
 
 my_id = imove.get_id(email="abdulatifsal@gmail.com", name="Abdellatif Dalab")["client_id"]
 
